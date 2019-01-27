@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<form class="form-signin" th:action="@{/crearnoticia}" th:object="${noticiaModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input 	type="hidden" th:field="*{id}" />
+			<h2 class="form-sigin-heading text-center">Editar Noticia</h2>
+			<label for="inputContenido" class="sr-only">Titulo</label>
+			<input type="text" id="inputTitulo" placeholder="Titulo" name="titulo" class="form-control" th:value="${titulo}" th:field="*{titulo}"/>
+			<p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="alert alert-danger" role="alert"></p>
+			<label for="inputDescripcion" class="sr-only">Descripcion</label>
+			<textarea id="inputDescripcion" placeholder="Descripcion" name="descripcion" rows="7" cols="40" class="form-control" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
+			<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert"></p>
+			<label for="inputContenido" class="sr-only">Contenido</label>
+			<textarea id="inputContenido" placeholder="Contenido" name="contenido" rows="10" cols="40"  class="form-control" th:value="${contenido}" th:field="*{contenido}"></textarea>
+			<p th:if="${#fields.hasErrors('contenido')}" th:errors="*{contenido}" class="alert alert-danger" role="alert"></p>
+			<label for="inputDestacada" class="sr-only">Destacar</label>
+			<p>Destacar Noticia 
+				<input th:if="${destacado}" type="checkbox" checked id="inputDestacada" name="destacada" th:field="*{destacada}"/>
+				<input th:unless="${destacado}" type="checkbox" checked id="inputDestacada" name="destacada" th:field="*{destacada}"/>
+			</p>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Actualizar
+			</button>
+		</form>
+	</div>
+</body>
+</html>

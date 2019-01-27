@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="listCompeticiones">
+		<a href="/competicionform?id=0" class="btn btn-info">Añadir competicion</a>
+		<table class="table table-striped" th:each="competicion : ${competiciones}">
+			<thead>
+				<tr>
+					<th scope="col" th:text="${competicion.nombre}"></th>
+					<th>
+						<a th:href="@{/competicion/(id=${competicion.competicion_id})}"> Ver competicion</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${competicion.descripcion}"></td>
+				<tr>
+				<tr>
+					<td th:text="${competicion.lugar}"></td>
+				<tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

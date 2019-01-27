@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<h2 class="form-sigin-heading text-center">Crear Categoria<h2/>
+		<form class="form-signin" th:action="@{/crearcategoria}" th:object="${categoriaModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<label for="inputTitulo" class="sr-only">Nombre</label>
+			<input type="text" id="inputNombre" placeholder="Nombre" name="nombre" class="form-control" th:field="*{nombre}"/>
+			<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></p>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Crear
+			</button>
+		</form>
+	</div>
+</body>
+</html>

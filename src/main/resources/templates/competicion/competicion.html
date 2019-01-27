@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="competicion">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col" th:text="${competicionModel.nombre}"></th>
+					<th>
+						<a th:href="@{/competicionform/(id=${competicionModel.competicion_id})}"> Editar competicion</a>
+					</th>
+					<th>
+						<a onclick="return confirm('Estas seguro?')" th:href="@{/removecompeticion/(id=${competicionModel.competicion_id})}"> Eliminar competicion</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${competicionModel.descripcion}"></td>
+				</tr>
+				<tr>
+					<td th:text="${competicionModel.fecha}"></td>
+				</tr>
+				<tr>
+					<td th:text="${competicionModel.lugar}"></td>
+				</tr>
+				<tr>
+					<td>
+						<a class="btn btn-info btn-sm" th:href="@{/competicionsuccess/(id=${competicionModel.competicion_id})}">Registrarse a la competicion</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<form class="form-signin" th:action="@{/registersucces}" th:object="${userModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<h2 class="form-sigin-heading">Registrese</h2>
+			<label for="inputEmail" class="sr-only">Nombre</label>
+			<input type="text" id="inputNombre" placeholder="Nombre" name="nombre" class="form-control" th:field="*{nombre}"/>
+			<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></p>
+			<label for="inputEmail" class="sr-only">Apellidos</label>
+			<input type="text" id="inputApellidos" placeholder="Apellidos" name="apellidos" class="form-control" th:field="*{apellidos}"/>
+			<p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}" class="alert alert-danger" role="alert"></p>
+			<label for="inputEmail" class="sr-only">Nombre de Usuario</label>
+			<input type="text" id="inputUsername" placeholder="Nombre de usuario" name="username" class="form-control" th:field="*{username}"/>
+			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" role="alert"></p>
+			<label for="inputPassword" class="sr-only">Contraseña</label>
+			<input type="password" id="inputPassword" placeholder="Contraseña" name="password" class="form-control" th:field="*{password}"/>
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></p>
+			<label for="inputEmail" class="sr-only">Email</label>
+			<input type="text" id="inputEmail" placeholder="Email" name="email" class="form-control" th:field="*{email}"/>
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger" role="alert"></p>
+			<label for="inputEmail" class="sr-only">Telefono</label>
+			<input type="number" id="inputTelefono" placeholder="Telefono" name="telefono" class="form-control" th:field="*{telefono}"/>
+			<p th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="alert alert-danger" role="alert"></p>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrarse
+			</button>
+		</form>
+	</div>
+</body>
+</html>

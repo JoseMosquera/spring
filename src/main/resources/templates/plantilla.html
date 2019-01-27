@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="gridLayout.css" th:href="@{/css/gridLayout.css}">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:fragment="navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="/index">Home</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Noticias </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/noticias">Noticias</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/noticiaform?id=0">Crear</a>
+						</div>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Juegos </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/juegosventa">Juegos en venta</a>
+							<a class="dropdown-item" href="/juegosalq">Juegos en alquier</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/juegoform?id=0">Crear</a>
+						</div>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Competiciones </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/competiciones">Competiciones</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/competicionform?id=0">Crear</a>
+						</div>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categorias </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/categorias">Categorias</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/categoriaform?id=0">Crear</a>
+						</div>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Plataformas </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/plataformas">Plataformas</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/plataformaform?id=0">Crear</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav" style="float: right;">
+					<li class="nav-item dropdown navbarLogin">
+						<a sec:authorize="!isAuthenticated()" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Iniciar sesion </a>
+						<a sec:authorize="isAuthenticated()" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span sec:authentication="name"></span></a>
+						<div class="dropdown-menu" style="width: 200px!important; left: -60%;" aria-labelledby="navbarDropdown" sec:authorize="!isAuthenticated()" >
+							<div class="container">
+								<form class="form-signin" th:action="@{/logincheck}" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+									<h4 class="form-sigin-heading">Iniciar Sesion</h4>
+									<label for="inputEmail" class="sr-only">Nombre de Usuario</label>
+									<input type="text" class="form-control userLogin" placeholder="Username" name="username" id="username" />
+									<label for="inputPassword" class="sr-only">Contraseña</label>
+									<input type="password" class="form-control" placeholder="Password" name="password" id="password" />
+									<button class="btn btn-sm btn-primary btn-block btnLogin" type="submit">
+										Iniciar Sesion
+									</button>
+								</form>
+								<hr>
+								<a style="font-size:15px;" href="/register">Aun no estas registrado?</a>
+							</div>
+							<div sec:authorize="isAuthenticated()" style="left: -80%;" class="container">
+								<a>My perfil</a>
+								<hr>
+								<a>Compras realizadas</a>
+								<hr>
+								<a>Alquileres pendientes</a>
+								<a>Alquileres realizados</a>
+								<hr>
+								<a>Competiciones futuras</a>
+								<a>Competiciones pasadas</a>
+								<hr>
+								<form th:action="@{/logout}" method="post">
+									<button class="btn btn-sm btn-primary btn-blck" type="submit"><span class="glyphicon glyphicon-out" aria-hidden="true"></span> Logout</button>
+								</form>
+							</div>
+						</div>
+						<div sec:authorize="isAuthenticated()" class="dropdown-menu" style="width: 200px!important; left: -160%;" aria-labelledby="navbarDropdown">
+							<div style="left: -80%;" class="container">
+								<a>My perfil</a>
+								<hr>
+								<a>Compras realizadas</a>
+								<hr>
+								<a>Alquileres pendientes</a>
+								<a>Alquileres realizados</a>
+								<hr>
+								<a>Competiciones futuras</a>
+								<a>Competiciones pasadas</a>
+								<hr>
+								<form th:action="@{/logout}" method="post">
+									<button class="btn btn-sm btn-primary btn-blck" type="submit"><span class="glyphicon glyphicon-out" aria-hidden="true"></span> Logout</button>
+								</form>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

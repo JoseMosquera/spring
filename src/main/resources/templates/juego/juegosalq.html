@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div  class="listJuegoAlq grid-container">
+		<div class="juegosAlq grid-item row justify-content-md-center" th:each="juego : ${juegos}">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${juego.titulo}"></h5>
+			  <div class="card-body">
+			    <p class="card-title" th:text="${juego.descripcion}"></p>
+			    <p class="card-text" th:text="${juego.precio} + €"></p>
+			    <a th:href="@{/juego/(id=${juego.juego_id})}" class="btn btn-primary">Ver mas</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

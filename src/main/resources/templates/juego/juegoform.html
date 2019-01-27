@@ -1,0 +1,49 @@
+ <!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<h2 class="form-sigin-heading text-center">Añadir Juego<h2/>
+		<form class="form-signin" th:action="@{/crearjuego}" th:object="${juegoModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<label for="inputTitulo" class="sr-only">Titulo</label>
+			<input type="text" id="inputTitulo" placeholder="Titulo" name="titulo" class="form-control" th:field="*{titulo}"/>
+			<p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="alert alert-danger" role="alert"></p>
+			<label for="inputDescripcion" class="sr-only">Descripcion</label>
+			<textarea id="inputDescripcion" placeholder="Descripcion" name="descripcion" rows="5" cols="40" class="form-control" th:field="*{descripcion}"></textarea>
+			<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert"></p>
+			<label for="inputPrecio" class="sr-only">Precio</label>
+			<input type="text" id="inputPrecio" name="precio" class="form-control" th:field="*{precio}"/>
+			<p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="alert alert-danger" role="alert"></p>
+			<label for="inputStock" class="sr-only">Stock</label>
+			<input type="number" id="inputStock" name="stock" class="form-control" th:field="*{stock}"/>
+			<p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="alert alert-danger" role="alert"></p>
+			<label for="inputTipo" class="sr-only">Tipo</label>
+			<select id="inputTipo" name="tipo"class="form-control" th:field="*{tipo}">
+				<option th:value="venta" th:text="venta"></option>
+				<option th:value="alquiler" th:text="alquiler"></option>
+			</select>
+			<label for="inputStock" class="sr-only">Lanzamiento</label>
+			<input type="date" id="inputLanzamiento" name="lanzamiento" class="form-control" th:field="*{lanzamiento}"/>
+			<label for="inputTitulo" class="sr-only">Caratula</label>
+			<input type="text" id="inputCaratula" placeholder="Caratula" name="caratula" class="form-control" th:field="*{caratula}"/>
+			<p th:if="${#fields.hasErrors('caratula')}" th:errors="*{caratula}" class="alert alert-danger" role="alert"></p>
+			<label for="inputCategoria" class="sr-only">Categoria</label>
+			<select id="inputCategoria" multiple="multiple" name="categoria" class="form-control" th:field="*{categoriasArray}">
+				<option th:each="categoria : ${listAllCategorias}" th:value="${categoria.nombre}" th:text="${categoria.nombre}"></option>
+			</select>
+			<label for="inputPlataforma" class="sr-only">Plataforma</label>
+			<select id="inputPlataforma" multiple="multiple" name="plataforma" class="form-control" th:field="*{plataformasArray}">
+				<option th:each="plataforma : ${listAllPlataformas}" th:value="${plataforma.nombre}" th:text="${plataforma.nombre}"></option>
+			</select>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Añadir
+			</button>
+		</form>
+	</div>
+</body>
+</html>

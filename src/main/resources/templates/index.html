@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="listNoticias">
+		<table class="table table-striped" th:each="noticia : ${noticias}">
+			<thead>
+				<tr>
+					<th scope="col" th:text="${noticia.titulo}"></th>
+					<th>
+						<a th:href="@{/noticia/(id=${noticia.id})}"> Ver noticia</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${noticia.descripcion}"></td>
+				<tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

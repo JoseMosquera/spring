@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<form class="form-signin" th:action="@{/logincheck}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<h2 class="form-sigin-heading">Iniciar Sesion</h2>
+			<label for="inputEmail" class="sr-only">Nombre de Usuario</label>
+			<input type="text" class="form-control" placeholder="Username" name="username" id="username" />
+			<label for="inputPassword" class="sr-only">Contraseña</label>
+			<input type="password" class="form-control" placeholder="Password" name="password" id="password" />
+			<div th:if="${error != null}" class="alert alert-danger" role="alert">Usuario o contraseña incorrecto</div>
+			<div th:if="${logout != null}" class="alert alert-info" role="alert">Se ha cerrado sesion correctamente</div>
+			<div th:if="${register != null}" class="alert alert-success" role="alert">Registrado correctamente!</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Iniciar Sesion
+			</button>
+			<a class="btn btn-lg btn-primary btn-block" href="/register">Registrarse</a>
+		</form>
+	</div>
+</body>
+</html>

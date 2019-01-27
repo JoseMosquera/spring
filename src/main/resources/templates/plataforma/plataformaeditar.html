@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<form class="form-signin" th:action="@{/crearplataforma}" th:object="${plataformaModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input 	type="hidden" th:field="*{id}" />
+			<h2 class="form-sigin-heading text-center">Editar Plataforma</h2>
+			<label for="inputContenido" class="sr-only">Nombre</label>
+			<input type="text" id="inputNombre" placeholder="Nombre" name="nombre" class="form-control" th:value="${nombre}" th:field="*{nombre}"/>
+			<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></p>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Actualizar
+			</button>
+		</form>
+	</div>
+</body>
+</html>

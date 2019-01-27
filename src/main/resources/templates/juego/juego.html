@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div  class="listJuegoAlq grid-container">
+		<div class="juegos grid-item row justify-content-md-center">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${juego.titulo}"></h5>
+			  <div class="card-body">
+			    <p class="card-title" th:text="${juego.descripcion}"></p>
+			    <p th:each="categoria : ${juego.getCategoriasArray()}" th:text="${categoria}" style="display: inline;"></p>
+			    <br>
+			    <p th:each="plataforma : ${juego.getPlataformasArray()}" th:text="${plataforma}" style="display: inline;"></p>
+			    <p class="card-text" th:text="${juego.precio} + €"></p>
+			    
+			    <a th:href="@{/juegoform/(id=${juego.juego_id})}" class="btn btn-primary">Editar</a>
+			    <a th:href="@{/removejuego/(id=${juego.juego_id})}" onclick="return confirm('Estas seguro?')" class="btn btn-primary">Eliminar</a>
+			  	<a class="btn btn-info btn-sm" th:href="@{/ventasuccess/(id=${juego.juego_id})}">Comprar</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="juego">
+		<table class="table table-striped" >
+			<thead>
+				<tr>
+					<th scope="col" th:text="${juego.titulo}"></th>
+					<th>
+						<a th:href="@{/juegoform/(id=${juego.juego_id})}"> Editar juego</a>
+					</th>
+					<th>
+						<a onclick="return confirm('Estas seguro?')" th:href="@{/removejuego/(id=${juego.juego_id})}"> Eliminar juego</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${juego.descripcion}"></td>
+				</tr>
+				<tr>
+					<td th:text="${juego.precio}"></td>
+				</tr>
+				<tr>
+					<td th:text="${juego.lanzamiento}"></td>
+				</tr>
+				<tr th:each="categoria : ${juego.getCategoriasArray()}">
+					<td th:text="${categoria}"></td>
+				</tr>
+				<tr th:each="plataforma : ${juego.getPlataformasArray()}">
+					<td th:text="${plataforma}"></td>
+				</tr>
+				<tr>
+					<td>
+						<a class="btn btn-info btn-sm" th:href="@{/ventasuccess/(id=${juego.juego_id})}">Comprar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div> -->
+</body>
+</html>

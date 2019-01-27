@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:replace="plantilla.html :: head"></div>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<br>
+	<div  class="listNoticias grid-container">
+		<div class="noticias grid-item" th:each="noticia : ${noticias}">
+			<div class="card">
+			  <h5 class="card-header">Tipo noticia (competicion, nombre de juego)</h5>
+			  <div class="card-body">
+			    <h5 class="card-title"><span th:text="${noticia.titulo}"></span></h5>
+			    <p class="card-text" th:text="${noticia.descripcion}"></p>
+			    <a th:href="@{/noticia/(id=${noticia.id})}" class="btn btn-primary">Ver mas</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

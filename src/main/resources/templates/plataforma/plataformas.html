@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<br>
+	<div class="listPlataformas">
+		<table class="table table-striped" th:each="plataforma : ${plataformas}">
+			<thead>
+				<tr>
+					<th>
+						<a>Nombre</a>
+					</th>
+					<th>
+						<a th:href="@{/plataformaform/(id=${plataforma.plataforma_id})}"> Editar plataforma</a>
+					</th>
+					<th>
+						<a th:href="@{/removeplataforma/(id=${plataforma.plataforma_id})}"> Editar plataforma</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${plataforma.nombre}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

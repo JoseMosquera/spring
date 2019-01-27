@@ -1,0 +1,30 @@
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="container">
+		<h2 class="form-sigin-heading text-center">Editar Competicion<h2/>
+		<form class="form-signin" th:action="@{/crearcompeticion}" th:object="${competicionModel}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input 	type="hidden" th:field="*{competicion_id}" />
+			<label for="inputTitulo" class="sr-only">Nombre</label>
+			<input type="text" id="inputNombre" placeholder="Nombre" name="nombre" class="form-control" th:value="${nombre}" th:field="*{nombre}"/>
+			<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger" role="alert"></p>
+			<label for="inputDescripcion" class="sr-only">Descripcion</label>
+			<textarea id="inputDescripcion" placeholder="Descripcion" name="descripcion" rows="5" cols="40" class="form-control" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
+			<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert"></p>
+			<label for="inputPrecio" class="sr-only">Fecha</label>
+			<input type="date" id="inputFecha" name="fecha" class="form-control" th:value="${fecha}" th:field="*{fecha}"/>
+			<p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="alert alert-danger" role="alert"></p>
+			<label for="inputStock" class="sr-only">Lugar</label>
+			<input type="text" id="inputLugar" placeholder="Lugar" name="lugar" class="form-control" th:value="${lugar}" th:field="*{lugar}"/>
+			<p th:if="${#fields.hasErrors('lugar')}" th:errors="*{lugar}" class="alert alert-danger" role="alert"></p>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Actualizar
+			</button>
+		</form>
+	</div>
+</body>
+</html>
