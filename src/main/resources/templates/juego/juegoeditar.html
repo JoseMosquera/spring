@@ -3,7 +3,7 @@
 </head>
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
-	<div class="container">
+	<div sec:authorize="hasRole('ROLE_ADMIN')" class="container">
 		<h2 class="form-sigin-heading text-center">Editar Juego<h2/>
 		<form class="form-signin" th:action="@{/crearjuego}" th:object="${juegoModel}" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -47,6 +47,9 @@
 				<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Actualizar
 			</button>
 		</form>
+	</div>
+	<div sec:authorize="hasRole('ROLE_USER')" class="container">
+		<h1>No tienes permiso para esta pagina</h1>
 	</div>
 </body>
 </html>

@@ -22,6 +22,7 @@ import com.game.JoseMosquera.controller.LoginController;
 import com.game.JoseMosquera.converter.UserConverter;
 import com.game.JoseMosquera.entity.Role;
 import com.game.JoseMosquera.model.UserModel;
+import com.game.JoseMosquera.repository.RoleRepository;
 import com.game.JoseMosquera.repository.UserRepository;
 import com.game.JoseMosquera.service.UserService;
 
@@ -37,6 +38,10 @@ public class UserServiceImpl implements UserDetailsService, UserService{
 	@Autowired
 	@Qualifier("userConverter")
 	private UserConverter userConverter;
+	
+	@Autowired
+	@Qualifier("roleRepository")
+	private RoleRepository roleRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -67,6 +72,7 @@ public class UserServiceImpl implements UserDetailsService, UserService{
 		userModel.setEnable(true);
 		LOG.info("Metodo addUser() devuelve una pass encriptada: "+userModel.getPassword());
 		com.game.JoseMosquera.entity.User user = userRepository.save(userConverter.model2entity(userModel));
+		roleRepository.save(new Role(user, "ROLE_USER"));
 		return userConverter.entity2model(user);
 	}
 	

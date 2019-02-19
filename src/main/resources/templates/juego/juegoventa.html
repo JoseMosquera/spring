@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div  class="listJuegoAlq grid-container">
+		<div class="juegos grid-item row justify-content-md-center">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${juego.titulo}"></h5>
+			  <div class="card-body">
+			  	<img class="card-img-top" th:src="@{/imgs/} + ${juego.caratula}" alt="Card image cap" style="width: 25%; height: 50%;">
+			    <p class="card-title" th:text="${juego.descripcion}"></p>
+			    <p th:each="categoria : ${juego.getCategoriasArray()}" th:text="${categoria}" style="display: inline;"></p>
+			    <br>
+			    <p th:each="plataforma : ${juego.getPlataformasArray()}" th:text="${plataforma}" style="display: inline;"></p>
+			    <p class="card-text" th:text="${juego.precio} + €"></p>
+			    <p class="card-text" th:text="${juego.stock}"></p>
+			    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/juegoform/(id=${juego.juego_id})}" class="btn btn-primary">Editar</a>
+			    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/removejuego/(id=${juego.juego_id})}" onclick="return confirm('Estas seguro?')" class="btn btn-primary">Eliminar</a>
+		  		<a class="btn btn-info" sec:authorize="hasRole('ROLE_USER')" th:if="${juego.stock>0}" th:href="@{/ventasuccess/(id=${juego.juego_id})}">Comprar</a>
+		  		<a class="btn btn-danger" sec:authorize="hasRole('ROLE_USER')" th:if="${juego.stock<=0}">Sin Stock</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

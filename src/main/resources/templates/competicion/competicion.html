@@ -5,36 +5,22 @@
 </head>
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
-	<div class="competicion">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col" th:text="${competicionModel.nombre}"></th>
-					<th>
-						<a th:href="@{/competicionform/(id=${competicionModel.competicion_id})}"> Editar competicion</a>
-					</th>
-					<th>
-						<a onclick="return confirm('Estas seguro?')" th:href="@{/removecompeticion/(id=${competicionModel.competicion_id})}"> Eliminar competicion</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td th:text="${competicionModel.descripcion}"></td>
-				</tr>
-				<tr>
-					<td th:text="${competicionModel.fecha}"></td>
-				</tr>
-				<tr>
-					<td th:text="${competicionModel.lugar}"></td>
-				</tr>
-				<tr>
-					<td>
-						<a class="btn btn-info btn-sm" th:href="@{/competicionsuccess/(id=${competicionModel.competicion_id})}">Registrarse a la competicion</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div  class="listJuegoVenta grid-container">
+		<div class="juegosVentas grid-item row justify-content-md-center">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${competicionModel.nombre}"></h5>
+			  <div class="card-body">
+			    <p class="card-title" th:text="${competicionModel.descripcion}"></p>
+			    <p class="card-text" th:text="${competicionModel.lugar}"></p>
+			    <p class="card-text" th:text="${competicionModel.fecha}"></p>
+			    <div>
+			    	<a sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="btn btn-info btn-sm" th:href="@{/competicionsuccess/(id=${competicionModel.competicion_id})}">Registrarse a la competicion</a>
+			    	<a sec:authorize="hasRole('ROLE_ADMIN')" onclick="return confirm('Estas seguro?')" th:href="@{/removecompeticion/(id=${competicionModel.competicion_id})}"> Eliminar competicion</a>
+			    	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/competicionform/(id=${competicionModel.competicion_id})}"> Editar competicion</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

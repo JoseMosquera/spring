@@ -33,6 +33,14 @@ public class Venta{
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	public int getVenta_id() {
+		return venta_id;
+	}
+
+	public void setVenta_id(int venta_id) {
+		this.venta_id = venta_id;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -57,8 +65,9 @@ public class Venta{
 		this.user = user;
 	}
 
-	public Venta(Date fecha, Juego juego, User user) {
+	public Venta(int venta_id, Date fecha, Juego juego, User user) {
 		super();
+		this.venta_id = venta_id;
 		this.fecha = fecha;
 		this.juego = juego;
 		this.user = user;
@@ -70,6 +79,6 @@ public class Venta{
 
 	@Override
 	public String toString() {
-		return "Venta [fecha=" + fecha + ", juego=" + juego + ", user=" + user + "]";
+		return "Venta [venta_id=" + venta_id + ", fecha=" + fecha + ", juego=" + juego + ", user=" + user + "]";
 	}
 }

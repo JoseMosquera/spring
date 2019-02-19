@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 public class NoticiaModel {
 
-	@NotNull
 	private int noticia_id;
 	
 	@NotNull

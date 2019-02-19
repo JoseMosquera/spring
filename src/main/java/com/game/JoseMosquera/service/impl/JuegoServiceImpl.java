@@ -1,16 +1,21 @@
 package com.game.JoseMosquera.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.game.JoseMosquera.component.Logs;
 import com.game.JoseMosquera.converter.CategoriaConverter;
 import com.game.JoseMosquera.converter.JuegoConverter;
-import com.game.JoseMosquera.entity.Categoria;
 import com.game.JoseMosquera.entity.Juego;
 import com.game.JoseMosquera.model.JuegoModel;
 import com.game.JoseMosquera.repository.CategoriaRepository;
@@ -40,6 +45,21 @@ public class JuegoServiceImpl implements JuegoService{
 	@Autowired
 	@Qualifier("categoriaConverter")
 	private CategoriaConverter categoriaConverter;
+	
+	private String upload_folder = ".//src//main//resources//static//imgs//";
+
+    public String saveFile(MultipartFile file, String extension) throws IOException {
+        if(!file.isEmpty()){
+            byte[] bytes = file.getBytes();
+            Date date = new Date();
+            String nombre = Long.toString(date.getTime());
+            nombre += "."+extension;
+            Path path = Paths.get(upload_folder + nombre);
+            Files.write(path,bytes);
+            return nombre;
+        }
+        return null;
+    }
 	
 	@Override
 	public List<JuegoModel> listJuegosVenta() {
@@ -89,14 +109,4 @@ public class JuegoServiceImpl implements JuegoService{
 		Logs.LOG.info("Llamada al metodo juego() de la clase JuegoServiceImpl, recibe un id: '"+id+"' y con el obtiene un juego: '"+juego.toString()+"'");
 		return juegoConverter.entity2model(juego);
 	}
-
-	@Override
-	public void addCategoriasJuego(int juego_id, int categoria_id) {
-		Juego juego = juegoRepository.getOne(juego_id);
-		Categoria categoria = categoriaRepository.getOne(categoria_id);
-		//categoriaConverter.model2entity(categoriaModel)
-		juego.getCategorias().add(categoria);
-		categoria.getJuegos().add(juego);
-	}
-
 }

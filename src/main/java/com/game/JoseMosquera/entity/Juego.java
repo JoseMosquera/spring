@@ -27,10 +27,10 @@ public class Juego {
 	@Column(name = "juego_id")
 	private int juego_id;
 	
-	@Column(name= "titulo")
+	@Column(name= "titulo", unique = false, nullable = false, length = 100)
 	private String titulo;
 	
-	@Column(name= "descripcion")
+	@Column(name= "descripcion", unique = false, nullable = false, length = 1000)
 	private String descripcion;
 	
 	@Column(name= "precio")

@@ -37,8 +37,10 @@ public class JuegoConverter {
 		juegoModel.setPrecio(juego.getPrecio());
 		juegoModel.setStock(juego.getStock());
 		juegoModel.setTipo(juego.getTipo());
+		
 		List<Categoria> categorias = juego.getCategorias();
 		String [] categoriasArray = new String[categorias.size()];
+		
 		for(int i=0; i<categorias.size(); i++) {
 			Categoria categoria = categorias.get(i);
 			categoriasArray[i] = categoria.getNombre();
@@ -47,6 +49,7 @@ public class JuegoConverter {
 		
 		List<Plataforma> plataformas = juego.getPlataformas();
 		String [] plataformasArray = new String[plataformas.size()];
+		
 		for(int i=0; i<plataformas.size(); i++) {
 			Plataforma plataforma = plataformas.get(i);
 			plataformasArray[i] = plataforma.getNombre();
@@ -67,8 +70,10 @@ public class JuegoConverter {
 		juego.setPrecio(juegoModel.getPrecio());
 		juego.setStock(juegoModel.getStock());
 		juego.setTipo(juegoModel.getTipo());
+		
 		String [] categoriasArray = juegoModel.getCategoriasArray();
 		List<Categoria> categorias = new ArrayList<Categoria>();
+		
 		for (int i = 0; i < categoriasArray.length; i++) {
 			String name = categoriasArray[i];
 			categorias.add(queryDSLCategoria.findCategoriaByName(name));
@@ -77,6 +82,7 @@ public class JuegoConverter {
 		
 		String [] plataformasArray = juegoModel.getPlataformasArray();
 		List<Plataforma> plataformas = new ArrayList<Plataforma>();
+		
 		for (int i = 0; i < plataformasArray.length; i++) {
 			String name = plataformasArray[i];
 			plataformas.add(queryDSLPlataforma.findPlataformaByName(name));

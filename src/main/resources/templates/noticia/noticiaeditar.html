@@ -8,11 +8,14 @@
 	<div class="container">
 		<form class="form-signin" th:action="@{/crearnoticia}" th:object="${noticiaModel}" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<input 	type="hidden" th:field="*{id}" />
+			<input 	type="hidden" th:field="*{noticia_id}" />
 			<h2 class="form-sigin-heading text-center">Editar Noticia</h2>
 			<label for="inputContenido" class="sr-only">Titulo</label>
 			<input type="text" id="inputTitulo" placeholder="Titulo" name="titulo" class="form-control" th:value="${titulo}" th:field="*{titulo}"/>
 			<p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="alert alert-danger" role="alert"></p>
+			<label for="inputTitulo" class="sr-only">Tipo</label>
+			<input type="text" id="inputTipo" placeholder="Noticia de competicion o juego..." name="tipo" class="form-control" th:value="${tipo}" th:field="*{tipo}"/>
+			<p th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="alert alert-danger" role="alert"></p>
 			<label for="inputDescripcion" class="sr-only">Descripcion</label>
 			<textarea id="inputDescripcion" placeholder="Descripcion" name="descripcion" rows="7" cols="40" class="form-control" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
 			<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="alert alert-danger" role="alert"></p>

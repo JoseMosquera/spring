@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +43,7 @@ public class NoticiaController {
 		return mav;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	@GetMapping("/noticia")
 	public ModelAndView noticia(int id) {
 		Logs.LOG.info("Llamada al metodo noticia() de la clase NoticiaController, recibe un id '"+id+"'");
@@ -51,6 +53,7 @@ public class NoticiaController {
 		return mav;		
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/noticiaform")
 	public String noticiaForm(Model model,
 			@RequestParam (name = "id", required = false) int id) {
@@ -69,6 +72,7 @@ public class NoticiaController {
 		return Vistas.ADDNOTICIA;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/crearnoticia")
 	public ModelAndView crearNoticia(@Valid @ModelAttribute("noticiaModel") NoticiaModel noticiaModel,
 			BindingResult bindingResult) {
@@ -89,6 +93,7 @@ public class NoticiaController {
 		return mav;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/removenoticia")
 	public ModelAndView removeNoticia(@RequestParam(name = "id", required = true) int id) {
 		Logs.LOG.info("Llamada al metodo removeNoticia() de la clase NoticiaController, retorna al metodo listNoticias()");

@@ -5,26 +5,21 @@
 </head>
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
-	<div class="listCompeticiones">
-		<a href="/competicionform?id=0" class="btn btn-info">Añadir competicion</a>
-		<table class="table table-striped" th:each="competicion : ${competiciones}">
-			<thead>
-				<tr>
-					<th scope="col" th:text="${competicion.nombre}"></th>
-					<th>
-						<a th:href="@{/competicion/(id=${competicion.competicion_id})}"> Ver competicion</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td th:text="${competicion.descripcion}"></td>
-				<tr>
-				<tr>
-					<td th:text="${competicion.lugar}"></td>
-				<tr>
-			</tbody>
-		</table>
+	<div  class="listJuegoVenta grid-container">
+		<div class="juegosVentas grid-item row justify-content-md-center">
+			<a sec:authorize="hasRole('ROLE_ADMIN')" href="/competicionform?id=0" class="btn btn-primary mb-2">Añadir competicion</a>
+			<div class="card mb-3" th:each="competicionModel : ${competiciones}">
+			  <h5 class="card-header"><span th:text="${competicionModel.nombre}"></h5>
+			  <div class="card-body">
+			    <p class="card-title" th:text="${competicionModel.descripcion}"></p>
+			    <p class="card-text" th:text="${competicionModel.lugar}"></p>
+			    <p class="card-text" th:text="${competicionModel.fecha}"></p>
+			    <div>
+			    	<a sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/competicion/(id=${competicionModel.competicion_id})}"> Ver competicion</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

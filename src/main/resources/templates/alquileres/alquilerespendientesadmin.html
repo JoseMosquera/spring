@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div  class="listJuegoVenta grid-container">
+		<div class="juegosVentas grid-item row justify-content-md-center" th:each="alquiler : ${alquileres}">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${alquiler.juegoModel.titulo}"></h5>
+			  <div class="card-body">
+			  	<p class="card-title" th:text="${alquiler.userModel.username}"></p>
+			    <p class="card-title" th:text="${alquiler.fecha}"></p>
+		  		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/devolveralquiler/(id=${alquiler.alquiler_id})}">Devolver</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

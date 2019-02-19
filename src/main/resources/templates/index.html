@@ -5,22 +5,18 @@
 </head>
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
-	<div class="listNoticias">
-		<table class="table table-striped" th:each="noticia : ${noticias}">
-			<thead>
-				<tr>
-					<th scope="col" th:text="${noticia.titulo}"></th>
-					<th>
-						<a th:href="@{/noticia/(id=${noticia.id})}"> Ver noticia</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td th:text="${noticia.descripcion}"></td>
-				<tr>
-			</tbody>
-		</table>
+	<div  class="listNoticias grid-container">
+		<div class="noticias grid-item" th:each="noticia : ${noticias}">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${noticia.tipo}"></span></h5>
+			  <div class="card-body">
+			    <h5 class="card-title"><span th:text="${noticia.titulo}"></span></h5>
+			    <p class="card-text" th:text="${noticia.descripcion}"></p>
+			    <a sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" th:href="@{/noticia/(id=${noticia.noticia_id})}" class="btn btn-primary">Ver mas</a>
+			  </div>
+			</div>
+		</div>
+	</div>
 	</div>
 </body>
 </html>

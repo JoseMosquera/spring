@@ -62,7 +62,7 @@ public class ParticipacionModel {
 
 	@Override
 	public String toString() {
-		return "ParticipacionModel [participacion_id=" + participacion_id + ", competicion_id=" + competicionModel
-				+ ", user_id=" + userModel + ", posicion=" + posicion + "]";
+		return "ParticipacionModel [participacion_id=" + participacion_id + ", competicion=" + competicionModel
+				+ ", user=" + userModel + ", posicion=" + posicion + "]";
 	}
 }

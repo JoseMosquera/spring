@@ -9,32 +9,15 @@
 	<div  class="Noticia grid-container">
 		<div class="noticia grid-item row justify-content-md-center">
 			<div class="card">
-			  <h5 class="card-header">Tipo noticia (competicion, nombre de juego)</h5>
+			  <h5 class="card-header"><span th:text="${noticia.tipo}"></span></h5>
 			  <div class="card-body">
 			    <h5 class="card-title"><span th:text="${noticia.titulo}"></span></h5>
-			    <p class="card-text" th:text="${noticia.contenido}"></p>
+			    <p class="card-text" th:text="${noticia.descripcion}"></p>
+		    	<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/noticiaform/(id=${noticia.noticia_id})}"> Editar noticia</a>
+			    <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger" onclick="return confirm('Estas seguro?')" th:href="@{/removenoticia/(id=${noticia.noticia_id})}"> Eliminar noticia</a>
 			  </div>
 			</div>
 		</div>
 	</div>
-	<!-- <div class="listNoticias">
-		<table class="table table-striped" >
-			<thead>
-				<tr>
-					<th scope="col" th:text="${noticia.titulo}"></th>
-					<th>
-						<a th:href="@{/noticiaform/(id=${noticia.id})}"> Editar noticia</a>
-					</th>
-					<th>
-						<a onclick="return confirm('Estas seguro?')" th:href="@{/removenoticia/(id=${noticia.id})}"> Eliminar noticia</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td th:text="${noticia.contenido}"></td>
-			</tbody>
-		</table>
-	</div> -->
 </body>
 </html>

@@ -39,6 +39,7 @@ public class VentaServiceImpl implements VentaService{
 	@Qualifier("juegoRepository")
 	private JuegoRepository juegoRepository;
 
+
 	@Override
 	public List<VentaModel> listAllVentas() {
 		Logs.LOG.info("Llamada al metodo listAllVentas() de la clase VentaServiceImpl");
@@ -46,30 +47,41 @@ public class VentaServiceImpl implements VentaService{
 		Logs.LOG.info("El metodo listAllVentas() recibe una lista de ventas y la pasa a una lista de ventasModel");
 		List<VentaModel> ventasModel = new ArrayList<VentaModel>();
 		
-		for(Venta venta : ventas) {
-			ventasModel.add(ventaConverter.entity2model(venta));
+		if(SecurityContextHolder.getContext().getAuthentication().getName() != null) {
+			String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+			User user = userRepository.findByUsername(userName);
+		
+		
+			for(Venta venta : ventas) {
+				if(venta.getUser() == user) {
+					ventasModel.add(ventaConverter.entity2model(venta));
+				}
+			}
 		}
 		return ventasModel;
 	}
 
 	@Override
 	public VentaModel addVenta(int idJuego) {
-		Venta venta = new Venta();
-		Logs.LOG.info("Llamada al metodo addVenta() de la clase VentaServiceImpl, recibe un id de un juego: '"+idJuego+"'");
 		Juego juego = juegoRepository.getOne(idJuego);
-		venta.setJuego(juego);
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		Logs.LOG.info("Obtiene el nombre del usuario registrado: '"+userName+"'");
-		User user = userRepository.findByUsername(userName);
-		Logs.LOG.info("Obtiene un user a traves del nombre de usuario obtenido antes: '"+user.toString()+"'");
-		venta.setUser(user);
-		int stock = (juego.getStock() - 1);
-		juego.setStock(stock);
-		Date fecha = new Date();
-		venta.setFecha(fecha);
-		Logs.LOG.info("Se genera una venta: '"+venta.toString()+"'");
-		ventaRepository.save(venta);
-		return ventaConverter.entity2model(venta);
+		if(juego.getStock()>0) {
+			Venta venta = new Venta();
+			Logs.LOG.info("Llamada al metodo addVenta() de la clase VentaServiceImpl, recibe un id de un juego: '"+idJuego+"'");
+			venta.setJuego(juego);
+			String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+			Logs.LOG.info("Obtiene el nombre del usuario registrado: '"+userName+"'");
+			User user = userRepository.findByUsername(userName);
+			Logs.LOG.info("Obtiene un user a traves del nombre de usuario obtenido antes: '"+user.toString()+"'");
+			venta.setUser(user);
+			int stock = (juego.getStock() - 1);
+			juego.setStock(stock);
+			Date fecha = new Date();
+			venta.setFecha(fecha);
+			Logs.LOG.info("Se genera una venta: '"+venta.toString()+"'");
+			ventaRepository.save(venta);
+			return ventaConverter.entity2model(venta);
+		}
+		return null;
 	}
 
 	@Override

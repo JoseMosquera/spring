@@ -6,7 +6,7 @@
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
 	<br>
-	<div class="listPlataformas">
+	<div class="container listPlataformas">
 		<table class="table table-striped" th:each="plataforma : ${plataformas}">
 			<thead>
 				<tr>
@@ -14,16 +14,17 @@
 						<a>Nombre</a>
 					</th>
 					<th>
-						<a th:href="@{/plataformaform/(id=${plataforma.plataforma_id})}"> Editar plataforma</a>
-					</th>
-					<th>
-						<a th:href="@{/removeplataforma/(id=${plataforma.plataforma_id})}"> Editar plataforma</a>
+						<a>Accion</a>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td th:text="${plataforma.nombre}"></td>
+					<td>
+						<a class="btn btn-primary" th:href="@{/plataformaform/(id=${plataforma.plataforma_id})}"> Editar plataforma</a>
+						<a class="btn btn-danger" th:href="@{/removeplataforma/(id=${plataforma.plataforma_id})}"> Eliminar plataforma</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

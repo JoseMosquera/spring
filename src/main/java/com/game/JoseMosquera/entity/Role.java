@@ -52,7 +52,7 @@ public class Role {
 		this.role = role;
 	}
 	
-	public Role(int userRoleId, User user, String role) {
+	public Role(User user, String role) {
 		this.user = user;
 		this.role = role;
 	}

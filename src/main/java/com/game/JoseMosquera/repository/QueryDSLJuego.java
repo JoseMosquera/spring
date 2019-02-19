@@ -18,6 +18,7 @@ public class QueryDSLJuego {
 	
 	@PersistenceContext
 	private EntityManager em;
+
 	
 	public List<Juego> listJuegosVenta(){
 		

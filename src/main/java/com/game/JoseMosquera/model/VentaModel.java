@@ -5,9 +5,12 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 public class VentaModel {
+	
+	@NotNull
+	private int venta_id;
 
 	@NotNull
-	private Date fehca;
+	private Date fecha;
 	
 	@NotNull
 	private UserModel userModel;
@@ -15,12 +18,20 @@ public class VentaModel {
 	@NotNull
 	private JuegoModel juegoModel;
 
-	public Date getFehca() {
-		return fehca;
+	public int getVenta_id() {
+		return venta_id;
 	}
 
-	public void setFehca(Date fehca) {
-		this.fehca = fehca;
+	public void setVenta_id(int venta_id) {
+		this.venta_id = venta_id;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public UserModel getUserModel() {
@@ -39,9 +50,10 @@ public class VentaModel {
 		this.juegoModel = juegoModel;
 	}
 
-	public VentaModel(Date fehca, UserModel userModel, JuegoModel juegoModel) {
+	public VentaModel(int venta_id, Date fecha, UserModel userModel, JuegoModel juegoModel) {
 		super();
-		this.fehca = fehca;
+		this.venta_id = venta_id;
+		this.fecha = fecha;
 		this.userModel = userModel;
 		this.juegoModel = juegoModel;
 	}
@@ -52,6 +64,7 @@ public class VentaModel {
 
 	@Override
 	public String toString() {
-		return "VentaModel [fehca=" + fehca + ", userModel=" + userModel + ", juegoModel=" + juegoModel + "]";
+		return "VentaModel [venta_id=" + venta_id + ", fecha=" + fecha + ", userModel=" + userModel + ", juegoModel="
+				+ juegoModel + "]";
 	}
 }

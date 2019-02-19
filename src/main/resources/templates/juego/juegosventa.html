@@ -5,6 +5,9 @@
 </head>
 <body>
 	<div th:replace="plantilla.html :: navbar"></div>
+	<div class="text-center">
+		<h1>Juegos en venta</h1>
+	</div>
 	<div  class="listJuegoVenta grid-container">
 		<div class="juegosVentas grid-item row justify-content-md-center" th:each="juego : ${juegos}">
 			<div class="card">
@@ -12,7 +15,7 @@
 			  <div class="card-body">
 			    <p class="card-title" th:text="${juego.descripcion}"></p>
 			    <p class="card-text" th:text="${juego.precio} + €"></p>
-			    <a th:href="@{/juego/(id=${juego.juego_id})}" class="btn btn-primary">Ver mas</a>
+			    <a sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" th:href="@{/juegoventa/(id=${juego.juego_id})}" class="btn btn-primary">Ver mas</a>
 			  </div>
 			</div>
 		</div>

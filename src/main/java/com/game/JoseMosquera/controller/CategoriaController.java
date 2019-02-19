@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import com.game.JoseMosquera.model.CategoriaModel;
 import com.game.JoseMosquera.service.impl.CategoriaServiceImpl;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class CategoriaController {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class CategoriaController {
 		mav.addObject("categorias", categoriaService.listAllCategorias());
 		return mav;
 	}
-	
+
 	@GetMapping("/categoria")
 	public ModelAndView categoria(@RequestParam("id") int id) {
 		Logs.LOG.info("Llamada al metodo categoria() de la clase CategoriaController, recibe un id '"+id+"'");
@@ -41,7 +43,7 @@ public class CategoriaController {
 		return mav;
 		
 	}
-	
+
 	@GetMapping("/categoriaform")
 	public String categoriaForm(Model model,
 			@RequestParam(name = "id", required = false) int id){
@@ -58,7 +60,7 @@ public class CategoriaController {
 		model.addAttribute("categoriaModel", categoriaModel);
 		return Vistas.ADDCATEGORIA;
 	}
-	
+
 	@PostMapping("/crearcategoria")
 	public ModelAndView crearCompeticion(@Valid @ModelAttribute("categoriaModel") CategoriaModel categoriaModel,
 			BindingResult bindingResult) {
@@ -76,7 +78,7 @@ public class CategoriaController {
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("removecategoria")
 	public ModelAndView removeCategoria(@RequestParam(name = "id", required = true) int id) {
 		Logs.LOG.info("Llamada al metodo removeCategoria() de la clase CategoriaController, retorna al metodo showCategorias()");

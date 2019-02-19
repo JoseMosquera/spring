@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class UserModel {
 
 	@NotNull
-	private int id;
+	private int user_id;
 	
 	@NotNull
 	@Size(min = 3, max = 20)
@@ -39,12 +39,12 @@ public class UserModel {
 	@Pattern(regexp = "^[0-9]{9}$", message = "el teléfono debe tener 9 carácteres digitales")
 	private String telefono;
 
-	public int getId() {
-		return id;
+	public int getUser_Id() {
+		return user_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUser_Id(int id) {
+		this.user_id = id;
 	}
 
 	public String getUsername() {
@@ -103,9 +103,9 @@ public class UserModel {
 		this.telefono = telefono;
 	}
 
-	public UserModel(int id, String username, String password, boolean enable, String nombre, String apellidos,
+	public UserModel(int user_id, String username, String password, boolean enable, String nombre, String apellidos,
 			String email, String telefono) {
-		this.id = id;
+		this.user_id = user_id;
 		this.username = username;
 		this.password = password;
 		this.enable = enable;
@@ -119,7 +119,7 @@ public class UserModel {
 
 	@Override
 	public String toString() {
-		return "UserModel [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", username=" + username
+		return "UserModel [user_id=" + user_id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", username=" + username
 				+ ", password=" + password + ", enable=" + enable + ", email=" + email + ", telefono=" + telefono + "]";
 	}
 	

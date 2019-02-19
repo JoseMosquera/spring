@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,7 @@ public class CompeticionController {
 		return mav;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	@GetMapping("/competicion")
 	public ModelAndView competicion(@RequestParam("id") int id) {
 		Logs.LOG.info("Llamada al metodo competicion() de la clase CompeticionController, recibe un id '"+id+"'");
@@ -41,7 +43,8 @@ public class CompeticionController {
 		return mav;
 		
 	}
-	
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/competicionform")
 	public String competicionForm(Model model,
 			@RequestParam(name = "id", required = false) int id){
@@ -58,7 +61,8 @@ public class CompeticionController {
 		model.addAttribute("competicionModel", competicionModel);
 		return Vistas.ADDCOMPETI;
 	}
-	
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/crearcompeticion")
 	public ModelAndView crearCompeticion(@Valid @ModelAttribute("competicionModel") CompeticionModel competicionModel,
 			BindingResult bindingResult) {
@@ -76,7 +80,8 @@ public class CompeticionController {
 		}
 		return mav;
 	}
-	
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("removecompeti")
 	public ModelAndView removeCompeticion(@RequestParam(name = "id", required = true) int id) {
 		Logs.LOG.info("Llamada al metodo removeCompeticion() de la clase CompeticionController, retorna al metodo showCompeticiones()");

@@ -13,12 +13,11 @@ public class JuegoModel {
 	private int juego_id;
 	
 	@NotNull
-	@Size(min = 3,max = 50)
-
+	@Size(min = 3,max = 100)
 	private String titulo;
 	
 	@NotNull
-	@Size(min = 500,max = 1000)
+	@Size(min = 250,max = 1000)
 	private String descripcion;
 	
 	@NotNull
@@ -38,10 +37,6 @@ public class JuegoModel {
 	
 	@NotNull
 	private String[] categoriasArray;
-
-	public String[] getCategoriasArray() {
-		return categoriasArray;
-	}
 	
 	@NotNull
 	private String[] plataformasArray;
@@ -52,6 +47,10 @@ public class JuegoModel {
 
 	public void setPlataformasArray(String[] plataformasArray) {
 		this.plataformasArray = plataformasArray;
+	}
+
+	public String[] getCategoriasArray() {
+		return categoriasArray;
 	}
 
 	public void setCategoriasArray(String[] categoriasArray) {

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,13 +19,14 @@ import com.game.JoseMosquera.constant.Vistas;
 import com.game.JoseMosquera.model.PlataformaModel;
 import com.game.JoseMosquera.service.impl.PlataformaServiceImpl;
 
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 public class PlataformaController {
 
 	@Autowired
 	@Qualifier("plataformaService")
 	private PlataformaServiceImpl plataformaService;
-	
+
 	@GetMapping("/plataformas")
 	public ModelAndView showPlataformas() {
 		Logs.LOG.info("Llamada al metodo showPlataforma() de la clase PlataformaController, retorna a la vista "+Vistas.PLATAFORMAS+" con un listado de plataformas");
@@ -32,7 +34,7 @@ public class PlataformaController {
 		mav.addObject("plataformas", plataformaService.listAllPlataformas());
 		return mav;
 	}
-	
+
 	@GetMapping("/plataformaform")
 	public String categoriaForm(Model model,
 			@RequestParam(name = "id", required = false) int id){
@@ -49,7 +51,7 @@ public class PlataformaController {
 		model.addAttribute("plataformaModel", plataformaModel);
 		return Vistas.ADDPLATAFORMA;
 	}
-	
+
 	@PostMapping("/crearplataforma")
 	public ModelAndView crearCompeticion(@Valid @ModelAttribute("plataformaModel") PlataformaModel plataformaModel,
 			BindingResult bindingResult) {
@@ -67,7 +69,7 @@ public class PlataformaController {
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("removeplataforma")
 	public ModelAndView removePlataforma(@RequestParam(name = "id", required = true) int id) {
 		Logs.LOG.info("Llamada al metodo removePlataforma() de la clase PlataformaController, retorna al metodo showPlataformas()");

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantilla.html :: head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="plantilla.html :: navbar"></div>
+	<div  class="listJuegoVenta grid-container">
+		<div class="juegosVentas grid-item row justify-content-md-center" th:each="participacion : ${participaciones}">
+			<div class="card">
+			  <h5 class="card-header"><span th:text="${participacion.competicionModel.nombre}"></h5>
+			  <div class="card-body">
+			    <p class="card-title" th:text="${participacion.competicionModel.lugar}"></p>
+			    <p class="card-title" th:text="${participacion.posicion}"></p>
+			    <p class="card-title" th:text="${participacion.competicionModel.fecha}"></p>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
